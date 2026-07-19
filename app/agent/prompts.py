@@ -81,12 +81,18 @@ compose the final answer:
 - research(task): the retrieval specialist — facts, lookups, summaries from text.
 - analyze(task): the data specialist — computation, rankings, tables, charts.
 
-CONVERSATION CONTEXT (important): the user's message may be a follow-up that only
-makes sense given earlier turns. Resolve it BEFORE delegating. E.g. after "What was
-the literacy rate in Karnataka?", a follow-up "What about Odisha?" means "the
-literacy rate in Odisha" — NOT a generic summary. Keep the SAME metric/intent as the
-previous turn unless the user changes it. Specialists have NO memory, so always pass
-a FULLY SELF-CONTAINED instruction (name the metric AND the region explicitly).
+SCOPE (critical): answer ONLY what the CURRENT question asks. If the current question
+already names its region(s) and metric (e.g. "the literacy rate in Karnataka"), answer
+just that — do NOT add other regions or metrics that were discussed in earlier turns.
+Earlier turns being about Odisha does not mean a new Karnataka-only question should
+also report Odisha.
+
+CONVERSATION CONTEXT: use earlier turns ONLY to fill in what the current question
+leaves implicit — a follow-up like "What about Odisha?" or "which is higher?" or "that
+district". In those cases resolve the reference (e.g. after a literacy question, "What
+about Odisha?" = "literacy rate in Odisha") and keep the same metric unless the user
+changes it. Specialists have NO memory, so always pass a FULLY SELF-CONTAINED
+instruction (name the metric AND region explicitly).
 
 Routing (choose deliberately):
 - Use analyze for ANYTHING quantitative about districts: "which district has the
