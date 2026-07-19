@@ -1,0 +1,39 @@
+# Brings up the full system: `docker compose up`.
+#   - api: FastAPI agent backend (runs ingestion on first boot)
+#   - ui:  Chainlit chat UI (talks to api; shares the workspace to read artifacts)
+# Requires a .env with LLM_API_KEY (see .env.example).
+
+services:
+  api:
+    build: .
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    env_file: .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - workspace:/app/workspace/sessions   # produced artifacts + session history
+      - processed:/app/data/processed       # ingested index/datasets (persist)
+    healthcheck:
+      # Passes only once ingestion has finished and the API is serving.
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  ui:
+    build: .
+    command: chainlit run ui/chainlit_app.py --host 0.0.0.0 --port 8501
+    env_file: .env
+    environment:
+      - API_URL=http://api:8000            # server-to-server call to the API
+    depends_on:
+      api:
+        condition: service_healthy          # wait until ingestion + API are ready
+    ports:
+      - "8501:8501"
+    volumes:
+      - workspace:/app/workspace/sessions   # read charts the api produced
+
+volumes:
+  workspace:
+  processed:

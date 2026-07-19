@@ -1,0 +1,47 @@
+# --- Secrets ---
+.env
+*.env
+!.env.example
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# --- Raw drop zone (canonical markdown lives in data/markdown/; PDFs/docx are huge) ---
+assets/
+
+# --- Claude Code machine-local settings ---
+.claude/settings.local.json
+
+# --- Generated at runtime ---
+data/processed/*
+!data/processed/.gitkeep
+workspace/sessions/*
+!workspace/sessions/.gitkeep
+
+# --- Editor / OS ---
+.idea/
+.vscode/
+.DS_Store
+*.swp
+
+# --- Chainlit ---
+# Commit config.toml + an (empty) chainlit.md so UI settings persist; ignore
+# only the auto-generated translations and uploaded files.
+.chainlit/translations/
+.files/
+
+# Stray code-exec outputs written to repo root
+/output/
