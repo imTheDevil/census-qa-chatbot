@@ -95,7 +95,7 @@ def split_pages(text: str, document: str) -> list[DocumentPage]:
 
     Text before the first marker is emitted with page=None. The marker line
     belongs to the page it introduces. Line numbers are 1-based and match what
-    ripgrep reports, so retrieval can map a matched line to its page.
+    the scanner reports, so retrieval can map a matched line to its page.
     """
     lines = text.splitlines()
     pages: list[DocumentPage] = []

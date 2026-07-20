@@ -1,7 +1,7 @@
 """Retrieval tools — the text lane.
 
-The knowledge base is the page-anchored markdown itself. `search_documents` greps
-it (ripgrep, with a pure-Python fallback) and turns every match into a Citation via
+The knowledge base is the page-anchored markdown itself. `search_documents` scans
+it (a pure-Python, grep-style keyword search that ranks lines by query-term overlap) and turns every match into a Citation via
 the page index, so provenance is structural, not guessed. `read_page` pulls a full
 page for summarization; `list_documents`/`list_tables` let the agent discover what
 exists (and support Table-of-Contents style navigation when a keyword search misses).

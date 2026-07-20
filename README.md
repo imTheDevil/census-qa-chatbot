@@ -13,7 +13,7 @@ the answer isn't in the documents.
 
 | Type | Example | How it's answered |
 |---|---|---|
-| Lookup | "What was the literacy rate in Karnataka?" | grep the prose → cite |
+| Lookup | "What was the literacy rate in Karnataka?" | keyword-search the prose → cite |
 | Summary | "Summarize the literacy findings for Odisha" | navigate section outline → cite |
 | Computation | "Which district has the highest sex ratio?" | query clean dataset + code |
 | Artifact | "Bar chart of the top 10 districts by population" | write + run pandas/matplotlib |
@@ -28,7 +28,7 @@ the answer isn't in the documents.
             Orchestrator  (routes, delegates, synthesizes, owns memory)
               /                                    \
    Retrieval specialist  (text lane)      Data specialist  (data lane)
-   grep + section outline over            clean per-district dataset (ETL)
+   keyword search + section outline over            clean per-district dataset (ETL)
    page-anchored markdown                 + agent-written pandas/matplotlib
 ```
 
@@ -36,7 +36,7 @@ the answer isn't in the documents.
   PageIndex-style section outline (summaries). Citations are structural (the page
   marker in the source), not guessed.
 - **Data lane** — an ETL normalizes the messy census tables into one clean, tidy
-  table per state; the agent writes and runs code over it (never grep numbers).
+  table per state; the agent writes and runs code over it (never text-search for numbers).
 - No vector DB / no knowledge graph (small, structured, numeric corpus — see
   DESIGN.md for why).
 

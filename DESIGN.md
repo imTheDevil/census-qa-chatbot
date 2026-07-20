@@ -67,13 +67,13 @@ grepping single values). **ETL** normalizes the district tables into one tidy CS
 per state (`district, total_pop, rural_pop, urban_pop, males, females,
 sex_ratio_2011, literacy_rate_2011`) — done once, deterministically, unit-tested.
 The agent then writes *trivial, reliable* pandas. This is the standard pattern:
-normalize structured data, don't grep numbers. Computation never runs on retrieved
+normalize structured data, don't text-search for numbers. Computation never runs on retrieved
 prose snippets.
 
-### Summaries: PageIndex-style outline — NOT blind grep
+### Summaries: PageIndex-style outline — NOT blind keyword search
 A section tree parsed from the document's **body headings** (not the printed TOC —
 its page numbers don't match our marker pages) lets the agent navigate to the right
-section (`read_section`) instead of stitching a summary from scattered grep hits.
+section (`read_section`) instead of stitching a summary from scattered keyword-search hits.
 
 ### Multi-agent orchestrator-worker — NOT single-agent, NOT a framework
 - **Single-agent (sufficient, but):** one agent with all 10 tools works, but the
